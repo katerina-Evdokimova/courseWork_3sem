@@ -49,7 +49,7 @@ public:
 
     void add(int x, int y, double weight) {
         nxt[++tot] = head[x], head[x] = tot, to[tot] = y, capacity[tot] = weight;
-        std::swap(x, y);
+        swap(x, y);
         nxt[++tot] = head[x], head[x] = tot, to[tot] = y, capacity[tot] = 0;
     }
 
@@ -251,8 +251,8 @@ int main() {
     // int maxflow1 = algoOnGraph->maxflow_FordFulkerson(graph, source, sink);
     int maxflow2 = algoOnGraph->maxflow_EdmondsKarp(graph1, source, sink);
     int maxflow3 = algoOnGraph->maxflow_Dinic(graph2, source, sink);
-    // cout << "maxflow computated by FordFulkerson: " << maxflow1 << endl;
-    cout << "maxflow computated by EdmondsKarp: " << maxflow2 << endl;
-    cout << "maxflow computated by Dinic: " << maxflow3 << endl;
+    // cout << "FordFulkerson: " << maxflow1 << endl;
+    cout << "EdmondsKarp: " << maxflow2 << endl;
+    cout << "Dinic: " << maxflow3 << endl;
     return 0;
 }
