@@ -10,16 +10,6 @@ using namespace std;
 
 using std::vector;
 
-struct Edge {
-    int x, y;
-    double weight;
-
-    bool operator<(const Edge edge) const {
-        return weight < edge.weight;
-    }
-};
-
-
 class Graph {
 private:
     int numPoints, vertex;
@@ -100,7 +90,7 @@ istream &operator>>(istream &s, Graph &graph) {
             graph.add(a, b, capacity);
         }
     }
-
+    return s;
 }
 
 #define INF 0x7fffffff
@@ -177,6 +167,7 @@ int Algoritms::DFS(Graph *graph, int s, int t, int flow) {
             return df;
         }
     }
+    return 0;
 }
 
 int Algoritms::BFS(Graph *graph, int s, int t, pair<int, int> *pre, int *flow) {
@@ -243,16 +234,95 @@ int main() {
     cin >> n >> m >> source >> sink;
 
     Graph *graph = new Graph(n, m);
-    Algoritms *algoOnGraph = new Algoritms();
+    Algoritms *algoritms= new Algoritms();
     cin >> *graph;
-    cout << *graph;
     Graph *graph1 = new Graph(graph);
     Graph *graph2 = new Graph(graph);
-    // int maxflow1 = algoOnGraph->maxflow_FordFulkerson(graph, source, sink);
-    int maxflow2 = algoOnGraph->maxflow_EdmondsKarp(graph1, source, sink);
-    int maxflow3 = algoOnGraph->maxflow_Dinic(graph2, source, sink);
-    // cout << "FordFulkerson: " << maxflow1 << endl;
+    int maxflow1 = algoritms->maxflow_FordFulkerson(graph, source, sink);
+    int maxflow2 = algoritms->maxflow_EdmondsKarp(graph1, source, sink);
+    int maxflow3 = algoritms->maxflow_Dinic(graph2, source, sink);
+    cout << "FordFulkerson: " << maxflow1 << endl;
     cout << "EdmondsKarp: " << maxflow2 << endl;
     cout << "Dinic: " << maxflow3 << endl;
     return 0;
 }
+
+/**
+ *
+17 23 1 8
+1 2 4572
+1 4 9600
+1 16 4200
+2 9 9000
+2 3 5600
+3 6 4000
+4 5 3600
+17 7 4000
+17 12 3300
+5 6 3400
+5 16 4860
+6 8 0
+7 13 3343
+13 8 7200
+12 13 3360
+11 8 3600
+15 11 4500
+14 15 3600
+9 14 5400
+9 10 4500
+10 15 4800
+16 3 4200
+4 17 5760
+
+12 16 1 12
+1 2 2751
+1 3 0
+2 5 888
+2 6 2640
+3 4 2913
+4 5 1569
+4 7 1875
+5 2 987
+5 4 843
+6 8 2127
+7 10 2781
+8 9 1040
+8 12 1449
+9 10 1140
+10 11 2532
+11 12 1149
+
+7 11 1 5
+0 1 5
+0 2 10
+0 4 4
+1 3 1
+1 6 3
+2 3 7
+3 6 5
+2 4 3
+2 5 7
+4 5 6
+5 6 4
+
+7 11 0 6
+0 1 5
+0 2 10
+0 4 4
+1 3 1
+1 6 3
+2 3 7
+3 6 5
+2 4 3
+2 5 7
+4 5 6
+5 6 4
+
+4 6 0 3
+0 1 2
+0 2 3
+1 2 3
+2 1 3
+1 3 4
+2 3 1
+ */
